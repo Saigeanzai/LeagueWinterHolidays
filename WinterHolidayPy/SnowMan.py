@@ -1,3 +1,5 @@
+from Snowball import Snowball
+
 class SnowMan:
     
     def __init__(self, scale=1, body_color='#F0F0F0', x=None, y=None):
@@ -28,9 +30,11 @@ class SnowMan:
         self.snowballY = 0
         self.snowballThrowX = 0
         self.snowballThrowY = 0
+        
+        self.snowballs = list()
   
-    def drawBody(self):
-        push()
+    def draw_body(self):
+        pushStyle()
         
         noStroke()
         fill(self.body_color)
@@ -38,10 +42,10 @@ class SnowMan:
         ellipse(self.x, self.offsetMid, 2.15 * self.radiusMid, 2 * self.radiusMid)
         ellipse(self.x, self.offsetTop, 2 * self.radiusTop, 2 * self.radiusTop)
         
-        pop()
+        popStyle()
   
-    def drawNose(self):
-        push()
+    def draw_nose(self):
+        pushStyle()
     
         noseHeight = 0.2 * self.radiusTop
         noseLength = 1.2 * self.radiusTop
@@ -50,10 +54,10 @@ class SnowMan:
         fill('#FFA500')
         triangle(self.x, self.offsetTop, self.x, self.offsetTop + noseHeight, self.x + noseLength, self.offsetTop)
      
-        pop()
+        popStyle()
   
-    def drawEyesMouth(self):
-        push()
+    def draw_eyes_mouth(self):
+        pushStyle()
     
         radiusEyes = 0.25 * self.radiusTop
     
@@ -71,10 +75,10 @@ class SnowMan:
         strokeWeight(smileWidth)
         arc(self.x, self.offsetTop, radiusSmile, radiusSmile, PI/4, 3*PI/4, OPEN)
         
-        pop()
+        popStyle()
   
-    def drawHat(self):
-        push()
+    def draw_hat(self):
+        pushStyle()
     
         brimWidth = 2.5 * self.radiusTop
         brimHeight = 0.3 * self.radiusTop
@@ -86,10 +90,24 @@ class SnowMan:
         rect(self.x - brimWidth/2, self.offsetTop - self.radiusTop, brimWidth, brimHeight)
         rect(self.x - topWidth/2, self.offsetTop - self.radiusTop - topHeight, topWidth, topHeight)
     
-        pop()
-  
-    def drawArms(self):
-        push()
+        popStyle()
+
+    def draw_buttons(self):
+        pushStyle()
+    
+        buttonSize = 0.25 * self.radiusMid;
+    
+        stroke(self.inverted)
+        strokeWeight(buttonSize)
+    
+        point(self.x, self.offsetMid)
+        point(self.x, self.offsetMid - (0.5 * self.radiusMid))
+        point(self.x, self.offsetMid + (0.5 * self.radiusMid))
+
+        popStyle()
+
+    def draw_arms(self):
+        pushStyle()
     
         armY = self.offsetMid - (0.3 * self.radiusMid)
         leftArmX =  self.x - (0.9 * self.radiusMid)
@@ -132,64 +150,31 @@ class SnowMan:
         line(leftArmX, armY , leftArmX + leftHandX, armY + leftHandY) 
         line(rightArmX, armY , rightArmX + rightHandX, armY + rightHandY)
     
-        if mousePressed:
-            # Build an increasingly large snowball when pressing the mouse
-      
+        if mousePressed and mouseButton == RIGHT:
+            # Create a snowball in the snowman's hand!
             self.snowballSize += 1
       
             strokeWeight(3)
             stroke(0)
+            fill(255)
             self.snowballThrowX = mouseX
             self.snowballThrowY = mouseY
             self.snowballX = leftArmX + leftHandX;
             self.snowballY = armY + leftHandY;
             circle(self.snowballX, self.snowballY, self.snowballSize);
 
-        else:
-
-            if self.snowballSize > 0:
-                # We have a snowball to throw!
-        
-                strokeWeight(3)
-                stroke(0)
-                circle( self.snowballX, self.snowballY, self.snowballSize)
-
-                if self.snowballX < 0 or self.snowballX > width or self.snowballY < 0 or self.snowballY > height:
-                    # Snowball is off the screen, reset
-
-                    self.snowballSize = 0
-                else:
-                    # Snowball on the screen so move it
-    
-                    if abs(self.snowballThrowX - leftArmX) == 0:
-                        return
-          
-                    thetaS = atan( abs(self.snowballThrowY - armY) / abs(self.snowballThrowX - leftArmX) )
-                    snowballIncX = -10 * cos(thetaS)
-                    snowballIncY = 10 * sin(thetaS)
-          
-                    if self.snowballThrowX > leftArmX:
-                        self.snowballX += 10 * cos(thetaS)
-                    else:
-                        self.snowballX += -10 * cos(thetaS)
+        for ball in self.snowballs:
+            ball.draw()
             
-                    if self.snowballThrowY > armY:
-                        self.snowballY += 10 * sin(thetaS)
-                    else:
-                        self.snowballY += -10 * sin(thetaS)
+        if len(self.snowballs) > 0:
+            self.snowballs[:] = [ball for ball in self.snowballs if ball.is_active]
     
-        pop()
-  
-    def drawButtons(self):
-        push()
-    
-        buttonSize = 0.25 * self.radiusMid;
-    
-        stroke(self.inverted)
-        strokeWeight(buttonSize)
-    
-        point(self.x, self.offsetMid)
-        point(self.x, self.offsetMid - (0.5 * self.radiusMid))
-        point(self.x, self.offsetMid + (0.5 * self.radiusMid))
-
-        pop()
+        popStyle()
+        
+    def throw_snowball(self):
+        if mouseButton == RIGHT:
+            if self.snowballSize > 0:
+                speed = constrain( 50 - (self.snowballSize * 0.5), 1, 50)
+                new_snowball = Snowball(self.snowballSize, self.snowballX, self.snowballY, self.snowballThrowX, self.snowballThrowY, speed)
+                self.snowballs.append(new_snowball);
+                self.snowballSize = 0

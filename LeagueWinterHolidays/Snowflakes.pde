@@ -39,8 +39,6 @@ class Snowflakes {
       flake.draw();
     }
 
-    println(snowflakes.size());
-
     // Remove snowflakes at the bottom of the screen
     for( int i = snowflakes.size()-1; i >= 0; i-- ){
       if( snowflakes.get(i).y > height ){

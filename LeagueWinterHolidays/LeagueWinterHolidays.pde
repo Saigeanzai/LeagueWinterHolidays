@@ -1,4 +1,4 @@
-SnowMan snowman;
+SnowMan frosty;
 
 // 1. Declare a PImage variable for the background. Don't initialize it!
 
@@ -28,6 +28,7 @@ void draw(){
 
   // 10. Create an object of the Snowfall class in setup
   //     similar to the SnowMan obect from 5.
+  //     DO NOT CREATE OR INITIALIZE THE VARIABLE HERE
   
   // 11. Call the Snowfall object's draw() method.
   //     Do you see snow falling when you run the code?
@@ -47,4 +48,10 @@ void draw(){
   // * See if you can figure out hwo to make the snowflakes sparkle
   // * See if you can add snow men of different shapes and sizes
 
+}
+
+void mouseReleased(){
+  if( frosty != null && mouseButton == RIGHT ){
+    frosty.throwSnowball();
+  }
 }

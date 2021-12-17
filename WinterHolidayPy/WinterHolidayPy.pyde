@@ -7,11 +7,11 @@ def setup():
     #    global bg
 
     # 2. Declare a global variable for a snow man, e.g.
-    #    global snow_man
+    #    global frosty
     
     # 3. Call size() to set the size of the sketch to at least
     #     width=1000 and height=800. The inputs to size() are
-    #     size(width, height) 
+    #     size(width, height)
     
     # 4. Call loadImage() with "snowBg.jpg" as an input
     #    and set the output to your background image variable 
@@ -24,12 +24,12 @@ def setup():
     pass
     
 def draw():
-    # 7. Call background() with your background image as an input 
+    # 7. Call background() with your background image as an input
 
     # 8. Run your code.
     #    Do you see your background?
     
-    # 9. Call the snow man's drawBody() method
+    # 9. Call the snow man's draw_body() method
 
     # 10. Run the code.
     #     Do you see the body of your snow man?
@@ -44,6 +44,7 @@ def draw():
   
     # 13. Initialize your snow fall variable in the setup function
     #     right below the snow man in step 6
+    #     DO NOT INITIALIZE THE VARIABLE HERE
 
     # 14. Call your snow fall variable's draw() method.
     #     Do you see snow falling when you run the code?
@@ -65,3 +66,7 @@ def draw():
     # * See if you can add snow men of different shapes and sizes
     # * See if you can figoure out how to throw a snow ball
     pass
+    
+def mouseReleased():
+  if frosty != None and mouseButton == RIGHT:
+    frosty.throw_snowball()
