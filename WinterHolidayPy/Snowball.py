@@ -1,7 +1,8 @@
 class Snowball:
     
-  def __init__(self, diameter, start_x, start_y, destination_x, destination_y, speed=10):
+  def __init__(self, diameter, start_x, start_y, destination_x, destination_y, ball_color=0, speed=10):
     self.speed = speed
+    self.ball_color = ball_color
     self.radius = diameter / 2
     self.x = start_x
     self.y = start_y
@@ -22,6 +23,7 @@ class Snowball:
     
     strokeWeight(3)
     stroke(0)
+    fill(self.ball_color)
     circle(self.x, self.y, 2 * self.radius)
 
     if self.x < -self.radius or self.x > width + self.radius or self.y < -self.radius or self.y > height + self.radius:

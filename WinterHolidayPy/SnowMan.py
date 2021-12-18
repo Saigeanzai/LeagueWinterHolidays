@@ -156,7 +156,7 @@ class SnowMan:
       
             strokeWeight(3)
             stroke(0)
-            fill(255)
+            fill(self.body_color)
             self.snowballThrowX = mouseX
             self.snowballThrowY = mouseY
             self.snowballX = leftArmX + leftHandX;
@@ -174,7 +174,7 @@ class SnowMan:
     def throw_snowball(self):
         if mouseButton == RIGHT:
             if self.snowballSize > 0:
-                speed = constrain( 50 - (self.snowballSize * 0.5), 1, 50)
-                new_snowball = Snowball(self.snowballSize, self.snowballX, self.snowballY, self.snowballThrowX, self.snowballThrowY, speed)
+                speed = constrain( 50 - (self.snowballSize * 0.2), 1, 50)
+                new_snowball = Snowball(self.snowballSize, self.snowballX, self.snowballY, self.snowballThrowX, self.snowballThrowY, self.body_color, speed)
                 self.snowballs.append(new_snowball);
                 self.snowballSize = 0

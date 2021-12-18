@@ -19,7 +19,7 @@ def setup():
     # 5. Call resize() with the width and height of your sketch
 
     # 6. Set your snowman variable to a new SnowMan()
-    #    snow_man = SnowMan()
+    #    frosty = SnowMan()
 
     pass
     
@@ -68,5 +68,6 @@ def draw():
     pass
     
 def mouseReleased():
-  if frosty != None and mouseButton == RIGHT:
-    frosty.throw_snowball()
+  if snowmen != None and mouseButton == RIGHT:
+      for sm in snowmen:
+        sm.throw_snowball()

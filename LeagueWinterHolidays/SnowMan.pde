@@ -184,7 +184,7 @@ public class SnowMan {
 
       strokeWeight(3);
       stroke(0);
-      fill(255);
+      fill(bodyColor);
       snowballThrowX = mouseX;
       snowballThrowY = mouseY;
       snowballX = leftArmX + leftHandX;
@@ -210,7 +210,7 @@ public class SnowMan {
   public void throwSnowball() {
     if ( mouseButton == RIGHT ) {
       if ( snowballSize > 0 ) {
-        snowballs.add(new Snowball(snowballSize, 10, snowballX, snowballY, snowballThrowX, snowballThrowY));
+        snowballs.add(new Snowball(snowballSize, 10, bodyColor, snowballX, snowballY, snowballThrowX, snowballThrowY));
         snowballSize = 0;
       }
     }

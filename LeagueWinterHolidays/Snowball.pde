@@ -2,11 +2,13 @@ public class Snowball {
   float x, y;
   float snowballIncX, snowballIncY;
   int radius, speed;
+  color ballColor;
   boolean isActive;
 
-  public Snowball(int diameter, int speed, float startX, float startY, float destinationX, float destinationY) {
+  public Snowball(int diameter, int speed, color c, float startX, float startY, float destinationX, float destinationY) {
     this.radius = diameter / 2;
     this.speed = speed;
+    this.ballColor = c;
     this.x = startX;
     this.y = startY;
     this.isActive = true;
@@ -29,6 +31,7 @@ public class Snowball {
     
     strokeWeight(3);
     stroke(0);
+    fill(ballColor);
     circle(x, y, 2*radius);
 
     if ( x < -radius || x > width + radius || y < -radius || y > height + radius ) {
