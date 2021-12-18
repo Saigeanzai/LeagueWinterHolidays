@@ -51,7 +51,9 @@ void draw(){
 }
 
 void mouseReleased(){
-  if( frosty != null && mouseButton == RIGHT ){
-    frosty.throwSnowball();
+  if( mouseButton == RIGHT ){
+    if( frosty != null ){
+      frosty.throwSnowball();
+    }
   }
 }
