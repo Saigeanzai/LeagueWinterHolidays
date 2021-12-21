@@ -17,7 +17,7 @@ class Globe {
   ArrayList<Snowman> snowmen;
 
   public Globe() {
-    this.globeImg = loadImage("cabin3c.png");
+    this.globeImg = loadImage("cabin.png");
     this.globeImg.resize(545, 600);
 
     this.startX = width / 2;
