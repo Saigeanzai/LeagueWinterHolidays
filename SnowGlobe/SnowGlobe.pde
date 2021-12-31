@@ -5,11 +5,10 @@ boolean dragGlobe = false;
 Globe globe;
 
 void setup() {
-
   // 2. Set the size of the sketch to at least 800 width 600 height
 
   // 3. Initialize the globe object to a new Globe
-
+  
 }
 
 void draw() {
@@ -23,10 +22,12 @@ void draw() {
 
   if (dragGlobe) {
     // 8. Call the globe object's drag method
+    
   }
 
   // 9. Run the program. What happens when you click on
   //    the globe and drag it?
+
 }
 
 void mousePressed() {
