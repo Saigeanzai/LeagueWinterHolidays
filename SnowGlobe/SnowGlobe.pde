@@ -28,6 +28,9 @@ void draw() {
   // 9. Run the program. What happens when you click on
   //    the globe and drag it?
 
+
+  // 10. Extra: Can you figure out how to add a snowman
+  //     inside the globe?
 }
 
 void mousePressed() {
