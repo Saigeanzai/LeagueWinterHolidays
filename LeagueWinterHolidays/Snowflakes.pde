@@ -86,7 +86,7 @@ class Snowflake {
       stroke( this.snowflakeColor );
     }
     
-    int m = 16;
+    int m = 12;
     float pDegrees = 360 / m;
     
     for (int i=0; i<m; i++) {
